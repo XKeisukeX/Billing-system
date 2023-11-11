@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div class="container">
+            <div class="hero-title">
+                <h2>Billing System</h2>
+                <img src="florid-web-wallet-and-online-banking.gif" alt="">
+            </div>
+            <div class="hero-text">
+                <h2 class="text-h2">Enter Items</h2>
+                <h2 class="text-h2">Enter Items</h2>
+                <h2 class="text-h2">Enter Items</h2>
+                <div id="itemList">
+                    <div class="item">
+                        <input type="text" class="item-name" placeholder="Item Name">
+                        <input type="number" class="item-price" placeholder="Price">
+                    </div>
+                </div>
+                <button id="addItem">Add Item</button>
+                <button id="calculateTotal">Calculate Total</button>
+                <div id="totalAmount"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const itemList = document.getElementById('itemList');
+    const addItemButton = document.getElementById('addItem');
+    const calculateTotalButton = document.getElementById('calculateTotal');
+    const totalAmount = document.getElementById('totalAmount');
+
+    addItemButton.addEventListener('click', function () {
+        const newItem = document.createElement('div');
+        newItem.classList.add('item');
+        newItem.innerHTML = `
+            <input type="text" class="item-name" placeholder="Item Name">
+            <input type="number" class="item-price" placeholder="Price">
+        `;
+        itemList.appendChild(newItem);
+    });
+
+    calculateTotalButton.addEventListener('click', function () {
+        const itemPrices = document.querySelectorAll('.item-price');
+        let totalPrice = 0;
+
+        itemPrices.forEach((priceInput) => {
+            const price = parseFloat(priceInput.value);
+            if (!isNaN(price)) {
+                totalPrice += price;
+            }
+        });
+
+        totalAmount.textContent = `Total: ₱${totalPrice.toFixed(2)}`;
+    });
+});
+    </script>
+</body>
+</html>
